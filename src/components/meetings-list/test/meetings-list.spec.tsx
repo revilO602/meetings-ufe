@@ -7,12 +7,12 @@ describe('meetings-list', () => {
       components: [MeetingsList],
       html: `<meetings-list></meetings-list>`,
     });
-    expect(page.root).toEqualHtml(`
-      <meetings-list>
-        <mock:shadow-root>
-          <slot></slot>
-        </mock:shadow-root>
-      </meetings-list>
-    `);
+
+    const wlList = page.rootInstance as MeetingsList;
+    const expectedPatients = wlList?.waitingPatients?.length
+
+    const items = page.root.shadowRoot.querySelectorAll("md-list-item");
+    expect(items.length).toEqual(expectedPatients);
+
   });
 });
