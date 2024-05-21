@@ -6,58 +6,69 @@ import { Component, Host, h } from '@stencil/core';
   shadow: true,
 })
 export class MeetingsList {
+  meetings: any[];
 
-  waitingPatients: any[];
-
-  private async getWaitingPatientsAsync() {
-    return await Promise.resolve(
-      [{
-        name: 'Jožko Gadda',
-        patientId: '10001',
-        since: new Date(Date.now() - 10 * 60).toISOString(),
-        estimatedStart: new Date(Date.now() + 65 * 60).toISOString(),
-        estimatedDurationMinutes: 15,
-        condition: 'Kontrola'
-      }, {
-        name: 'Bc. August Cézar',
-        patientId: '10096',
-        since: new Date(Date.now() - 30 * 60).toISOString(),
-        estimatedStart: new Date(Date.now() + 30 * 60).toISOString(),
-        estimatedDurationMinutes: 20,
-        condition: 'Teploty'
-      }, {
-        name: 'Ing. Ferdinand Trety',
-        patientId: '10028',
-        since: new Date(Date.now() - 72 * 60).toISOString(),
-        estimatedStart: new Date(Date.now() + 5 * 60).toISOString(),
-        estimatedDurationMinutes: 15,
-        condition: 'Bolesti hrdla'
-      }]
-    );
+  private async getMeetingsAsync() {
+    return await Promise.resolve([
+      {
+        doctorName: 'Jožko Púčik',
+        patientName: 'Jožko Púčik',
+        date: new Date(Date.now()).toISOString(),
+        startTime: new Date(Date.now() - 10 * 60).toISOString(),
+        endTime: new Date(Date.now() + 65 * 60).toISOString(),
+        symptoms: 'Kontrola',
+        diagnosis: 'Kontrola',
+        notes: 'Kontrola',
+      },
+      {
+        doctorName: 'Jožko Púčik',
+        patientName: 'Jožko Púčik',
+        date: new Date(Date.now()).toISOString(),
+        startTime: new Date(Date.now() - 10 * 60).toISOString(),
+        endTime: new Date(Date.now() + 65 * 60).toISOString(),
+        symptoms: 'Kontrola',
+        diagnosis: 'Kontrola',
+        notes: 'Kontrola',
+      },
+      {
+        doctorName: 'Jožko Púčik',
+        patientName: 'Jožko Púčik',
+        date: new Date(Date.now()).toISOString(),
+        startTime: new Date(Date.now() - 10 * 60).toISOString(),
+        endTime: new Date(Date.now() + 65 * 60).toISOString(),
+        symptoms: 'Kontrola',
+        diagnosis: 'Kontrola',
+        notes: 'Kontrola',
+      },
+    ]);
   }
-
   async componentWillLoad() {
-    this.waitingPatients = await this.getWaitingPatientsAsync();
+    this.meetings = await this.getMeetingsAsync();
   }
-
+  private isoDateToLocaleTime(iso: string) {
+    if (!iso) return '';
+    return new Date(Date.parse(iso)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }
+  private isoDateToLocaleDate(iso: string) {
+    if (!iso) return '';
+    return new Date(Date.parse(iso)).toLocaleDateString();
+  }
   render() {
     return (
       <Host>
         <md-list>
-          {this.waitingPatients.map(patient =>
+          {this.meetings.map(meeting => (
             <md-list-item>
-              <div slot="headline">{patient.name}</div>
-              <div slot="supporting-text">{"Predpokladaný vstup: " + this.isoDateToLocale(patient.estimatedStart)}</div>
-              <md-icon slot="start">person</md-icon>
+              <div slot="headline">{'Doktor: ' + meeting.doctorName}</div>
+              <div slot="headline">{'Pacient: ' + meeting.patientName}</div>
+              <div slot="supporting-text">
+                {this.isoDateToLocaleDate(meeting.date) + ' ' + this.isoDateToLocaleTime(meeting.startTime) + ' - ' + this.isoDateToLocaleTime(meeting.endTime)}
+              </div>
+              <md-icon slot="start">contact_phone</md-icon>
             </md-list-item>
-          )}
+          ))}
         </md-list>
-      </Host >
+      </Host>
     );
-  }
-
-  private isoDateToLocale(iso: string) {
-    if (!iso) return '';
-    return new Date(Date.parse(iso)).toLocaleTimeString()
   }
 }
