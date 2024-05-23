@@ -68,10 +68,7 @@ export class MeetingsApp {
         ) : element === 'creator' ? (
           <meetings-creator oncancel-clicked={() => navigate('./list')}></meetings-creator>
         ) : (
-          <meetings-list
-            onentry-clicked={(ev: CustomEvent<string>) => navigate('./entry/' + ev.detail)}
-            oncreator-clicked={(ev: CustomEvent<string>) => navigate('./create')}
-          ></meetings-list>
+          <meetings-list onentry-clicked={(ev: CustomEvent<string>) => navigate('./entry/' + ev.detail)} oncreator-clicked={() => navigate('./create')}></meetings-list>
         )}
       </Host>
     );
