@@ -1,0 +1,55 @@
+
+:host {
+  --_wl-editor_gap: var(--wl-gap, 0.5rem);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--_wl-editor_gap);
+  padding: var(--_wl-editor_gap);
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.important {
+  color: red;
+  display: flex;
+  align-items: center;
+}
+
+strong {
+  padding-left: 10px;
+}
+
+em {
+  font-weight: bold;
+}
+
+p strong {
+  display: inline-block;
+  width: 120px;
+  font-weight: bold;
+}
+
+.basic-info {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f3e8ff; /* Very light (faded) purple */
+  padding: 10px 20px;
+  width: 600px;
+  margin: 0px auto;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+}
+
+md-divider {
+  margin-bottom: var(--_wl-editor_gap);
+}

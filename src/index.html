@@ -6,11 +6,12 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <title>Meetings List</title>
-
+    <base href="/"/>
     <script type="module" src="/build/meetings-ufe.esm.js"></script>
     <script nomodule src="/build/meetings-ufe.js"></script>
   </head>
   <body style="font-family: 'Roboto';">
-    <meetings-list></meetings-list>
+     <!-- web application root component -->
+     <meetings-app base-path="/meetings/"></meetings-app>
   </body>
 </html>

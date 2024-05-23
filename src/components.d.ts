@@ -6,24 +6,150 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface MeetingsApp {
+        "basePath": string;
+    }
+    interface MeetingsCreator {
+    }
+    interface MeetingsDetail {
+        "entryId": string;
+    }
+    interface MeetingsEditor {
+        "entryId": string;
+    }
     interface MeetingsList {
     }
 }
+export interface MeetingsCreatorCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMeetingsCreatorElement;
+}
+export interface MeetingsDetailCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMeetingsDetailElement;
+}
+export interface MeetingsEditorCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMeetingsEditorElement;
+}
+export interface MeetingsListCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMeetingsListElement;
+}
 declare global {
+    interface HTMLMeetingsAppElement extends Components.MeetingsApp, HTMLStencilElement {
+    }
+    var HTMLMeetingsAppElement: {
+        prototype: HTMLMeetingsAppElement;
+        new (): HTMLMeetingsAppElement;
+    };
+    interface HTMLMeetingsCreatorElementEventMap {
+        "creator-closed": string;
+        "cancel-clicked": string;
+    }
+    interface HTMLMeetingsCreatorElement extends Components.MeetingsCreator, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMeetingsCreatorElementEventMap>(type: K, listener: (this: HTMLMeetingsCreatorElement, ev: MeetingsCreatorCustomEvent<HTMLMeetingsCreatorElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMeetingsCreatorElementEventMap>(type: K, listener: (this: HTMLMeetingsCreatorElement, ev: MeetingsCreatorCustomEvent<HTMLMeetingsCreatorElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMeetingsCreatorElement: {
+        prototype: HTMLMeetingsCreatorElement;
+        new (): HTMLMeetingsCreatorElement;
+    };
+    interface HTMLMeetingsDetailElementEventMap {
+        "editor-clicked": string;
+        "cancel-clicked": string;
+    }
+    interface HTMLMeetingsDetailElement extends Components.MeetingsDetail, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMeetingsDetailElementEventMap>(type: K, listener: (this: HTMLMeetingsDetailElement, ev: MeetingsDetailCustomEvent<HTMLMeetingsDetailElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMeetingsDetailElementEventMap>(type: K, listener: (this: HTMLMeetingsDetailElement, ev: MeetingsDetailCustomEvent<HTMLMeetingsDetailElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMeetingsDetailElement: {
+        prototype: HTMLMeetingsDetailElement;
+        new (): HTMLMeetingsDetailElement;
+    };
+    interface HTMLMeetingsEditorElementEventMap {
+        "editor-closed": string;
+        "cancel-clicked": string;
+    }
+    interface HTMLMeetingsEditorElement extends Components.MeetingsEditor, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMeetingsEditorElementEventMap>(type: K, listener: (this: HTMLMeetingsEditorElement, ev: MeetingsEditorCustomEvent<HTMLMeetingsEditorElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMeetingsEditorElementEventMap>(type: K, listener: (this: HTMLMeetingsEditorElement, ev: MeetingsEditorCustomEvent<HTMLMeetingsEditorElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMeetingsEditorElement: {
+        prototype: HTMLMeetingsEditorElement;
+        new (): HTMLMeetingsEditorElement;
+    };
+    interface HTMLMeetingsListElementEventMap {
+        "entry-clicked": string;
+        "creator-clicked": string;
+    }
     interface HTMLMeetingsListElement extends Components.MeetingsList, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMeetingsListElementEventMap>(type: K, listener: (this: HTMLMeetingsListElement, ev: MeetingsListCustomEvent<HTMLMeetingsListElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMeetingsListElementEventMap>(type: K, listener: (this: HTMLMeetingsListElement, ev: MeetingsListCustomEvent<HTMLMeetingsListElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLMeetingsListElement: {
         prototype: HTMLMeetingsListElement;
         new (): HTMLMeetingsListElement;
     };
     interface HTMLElementTagNameMap {
+        "meetings-app": HTMLMeetingsAppElement;
+        "meetings-creator": HTMLMeetingsCreatorElement;
+        "meetings-detail": HTMLMeetingsDetailElement;
+        "meetings-editor": HTMLMeetingsEditorElement;
         "meetings-list": HTMLMeetingsListElement;
     }
 }
 declare namespace LocalJSX {
+    interface MeetingsApp {
+        "basePath"?: string;
+    }
+    interface MeetingsCreator {
+        "onCancel-clicked"?: (event: MeetingsCreatorCustomEvent<string>) => void;
+        "onCreator-closed"?: (event: MeetingsCreatorCustomEvent<string>) => void;
+    }
+    interface MeetingsDetail {
+        "entryId"?: string;
+        "onCancel-clicked"?: (event: MeetingsDetailCustomEvent<string>) => void;
+        "onEditor-clicked"?: (event: MeetingsDetailCustomEvent<string>) => void;
+    }
+    interface MeetingsEditor {
+        "entryId"?: string;
+        "onCancel-clicked"?: (event: MeetingsEditorCustomEvent<string>) => void;
+        "onEditor-closed"?: (event: MeetingsEditorCustomEvent<string>) => void;
+    }
     interface MeetingsList {
+        "onCreator-clicked"?: (event: MeetingsListCustomEvent<string>) => void;
+        "onEntry-clicked"?: (event: MeetingsListCustomEvent<string>) => void;
     }
     interface IntrinsicElements {
+        "meetings-app": MeetingsApp;
+        "meetings-creator": MeetingsCreator;
+        "meetings-detail": MeetingsDetail;
+        "meetings-editor": MeetingsEditor;
         "meetings-list": MeetingsList;
     }
 }
@@ -31,6 +157,10 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "meetings-app": LocalJSX.MeetingsApp & JSXBase.HTMLAttributes<HTMLMeetingsAppElement>;
+            "meetings-creator": LocalJSX.MeetingsCreator & JSXBase.HTMLAttributes<HTMLMeetingsCreatorElement>;
+            "meetings-detail": LocalJSX.MeetingsDetail & JSXBase.HTMLAttributes<HTMLMeetingsDetailElement>;
+            "meetings-editor": LocalJSX.MeetingsEditor & JSXBase.HTMLAttributes<HTMLMeetingsEditorElement>;
             "meetings-list": LocalJSX.MeetingsList & JSXBase.HTMLAttributes<HTMLMeetingsListElement>;
         }
     }

@@ -1,0 +1,78 @@
+
+:host {
+  --_wl-editor_gap: var(--wl-gap, 0.5rem);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--_wl-editor_gap);
+  padding: var(--_wl-editor_gap);
+  align-items: center;
+}
+
+.meeting-form {
+  --_wl-editor_gap: var(--wl-gap, 0.5rem);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--_wl-editor_gap);
+  padding: var(--_wl-editor_gap);
+  width: 900px;
+  margin: 0px auto;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  width: 900px;
+  gap: 20px;
+  margin-bottom: 1rem;
+}
+
+.form-half-item {
+  display: flex;
+  flex-direction: row;
+  width: 440px;
+}
+
+.platforms {
+  display: flex;
+  flex-direction: column;
+  width: 440px;
+}
+
+.radio-item {
+  margin-bottom: 1rem;
+}
+
+.label {
+  margin-left: 1rem;
+}
+
+.important {
+  display: flex;
+  flex-direction: column;
+  width: 440px;
+}
+
+.switch-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.gap {
+  height: 1rem;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+
+}
+
+md-divider {
+  margin-bottom: var(--_wl-editor_gap);
+}
