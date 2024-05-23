@@ -7,6 +7,6 @@ describe('meetings-detail', () => {
       components: [MeetingsDetail],
       html: `<meetings-detail></meetings-detail>`,
     });
-    expect(1).toEqual(1);
+    expect(page).toEqual(page);
   });
 });

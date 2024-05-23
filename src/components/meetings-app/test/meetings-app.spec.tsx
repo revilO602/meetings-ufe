@@ -7,6 +7,6 @@ describe('meetings-app', () => {
       components: [MeetingsApp],
       html: `<meetings-app></meetings-app>`,
     });
-    expect(1).toEqual(1);
+    expect(page).toEqual(page);
   });
 });

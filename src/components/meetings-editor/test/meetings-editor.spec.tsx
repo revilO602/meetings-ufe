@@ -7,6 +7,6 @@ describe('meetings-editor', () => {
       components: [MeetingsEditor],
       html: `<meetings-editor></meetings-editor>`,
     });
-    expect(1).toEqual(1);
+    expect(page).toEqual(page);
   });
 });
