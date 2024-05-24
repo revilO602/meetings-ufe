@@ -7,6 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface MeetingsApp {
+        "apiBase": string;
         "basePath": string;
     }
     interface MeetingsCreator {
@@ -18,6 +19,7 @@ export namespace Components {
         "entryId": string;
     }
     interface MeetingsList {
+        "apiBase": string;
     }
 }
 export interface MeetingsCreatorCustomEvent<T> extends CustomEvent<T> {
@@ -125,6 +127,7 @@ declare global {
 }
 declare namespace LocalJSX {
     interface MeetingsApp {
+        "apiBase"?: string;
         "basePath"?: string;
     }
     interface MeetingsCreator {
@@ -142,6 +145,7 @@ declare namespace LocalJSX {
         "onEditor-closed"?: (event: MeetingsEditorCustomEvent<string>) => void;
     }
     interface MeetingsList {
+        "apiBase"?: string;
         "onCreator-clicked"?: (event: MeetingsListCustomEvent<string>) => void;
         "onEntry-clicked"?: (event: MeetingsListCustomEvent<string>) => void;
     }

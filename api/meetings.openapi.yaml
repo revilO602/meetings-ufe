@@ -1,0 +1,108 @@
+openapi: 3.0.0
+servers:
+  - description: Cluster Endpoint
+    url: /api
+info:
+  description: Online meetings between doctors and patients management for Web-In-Cloud system
+  version: "1.0.0"
+  title: Meetings Api
+  contact:
+    email: leoentiev.oliver@gmail.com
+  license:
+    name: CC BY 4.0
+    url: "https://creativecommons.org/licenses/by/4.0/"
+tags:
+  - name: meetingsList
+    description: Meetings List API
+paths:
+  "/meetings":
+    get:
+      tags:
+        - meetingsList
+      summary: Provides the online meetings list
+      operationId: getMeetingsList
+      description: You get a list of online meetings
+      responses:
+        "200":
+          description: value of the meetings list entries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MeetingsListEntry"
+              examples:
+                response:
+                  $ref: "#/components/examples/MeetingsListEntriesExample"
+components:
+  schemas:
+    MeetingsListEntry:
+      type: object
+      required:
+        [id, doctorName, patientName, date, startTime, endTime, important]
+      properties:
+        id:
+          type: string
+          example: x321ab3
+          description: Unique id of the entry in this meetings list
+        doctorName:
+          type: string
+          example: Jožko Púčik
+          description: Name of doctor for the meeting
+        patientName:
+          type: string
+          example: Jožko Púčik
+          description: Name of patient for the meeting
+        date:
+          type: string
+          format: date
+          example: "2038-12-24"
+          description: Date when meeting will take place
+        startTime:
+          type: string
+          format: time
+          example: "10:35"
+          description: Start time of meeting
+        endTime:
+          type: string
+          format: time
+          example: "10:35"
+          description: End time of meeting
+        important:
+          type: boolean
+          example: true
+          description: Whether meeting is important
+      example:
+        $ref: "#/components/examples/MeetingsListEntryExample"
+  examples:
+    MeetingsListEntryExample:
+      summary: Ľudomír Zlostný and Dr. Peter Fila meeting
+      description: |
+        Entry represents an online meeting between patient and doctor
+      value:
+        id: x321ab3
+        patientName: Ľudomír Zlostný
+        doctorName: Ľudomír Zlostný
+        date: "2038-12-24"
+        startTime: "10:35"
+        endTime: "11:35"
+        important: false
+    MeetingsListEntriesExample:
+      summary: List of online meetings
+      description: |
+        Example list of online meeting containing 2 meetings
+      value:
+        - id: x321ab3
+          doctorName: Dr. Jožko Púčik
+          patientName: Pacient Chorak
+          date: "2038-12-24"
+          startTime: "10:35"
+          endTime: "11:35"
+          important: false
+        - id: x321ab3
+          doctorName: Dr. Jožko Mrkva
+          patientName: Pacient Zdravak
+          date: "2038-12-26"
+          startTime: "10:35"
+          endTime: "11:35"
+          important: true

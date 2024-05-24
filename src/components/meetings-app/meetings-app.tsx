@@ -13,6 +13,7 @@ export class MeetingsApp {
   @State() private relativePath = '';
 
   @Prop() basePath: string = '';
+  @Prop() apiBase: string;
 
   componentWillLoad() {
     const baseUri = new URL(this.basePath, document.baseURI || '/').pathname;
@@ -68,7 +69,11 @@ export class MeetingsApp {
         ) : element === 'creator' ? (
           <meetings-creator oncancel-clicked={() => navigate('./list')}></meetings-creator>
         ) : (
-          <meetings-list onentry-clicked={(ev: CustomEvent<string>) => navigate('./entry/' + ev.detail)} oncreator-clicked={() => navigate('./create')}></meetings-list>
+          <meetings-list
+            api-base={this.apiBase}
+            onentry-clicked={(ev: CustomEvent<string>) => navigate('./entry/' + ev.detail)}
+            oncreator-clicked={() => navigate('./create')}
+          ></meetings-list>
         )}
       </Host>
     );
