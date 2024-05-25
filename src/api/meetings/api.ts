@@ -71,6 +71,97 @@ export interface MeetingsListEntry {
      * @memberof MeetingsListEntry
      */
     'important': boolean;
+    /**
+     * Online platform for the meeting
+     * @type {string}
+     * @memberof MeetingsListEntry
+     */
+    'platform': string;
+    /**
+     * Patients symptoms
+     * @type {string}
+     * @memberof MeetingsListEntry
+     */
+    'symptoms': string;
+    /**
+     * Diagnosis for the patients problems
+     * @type {string}
+     * @memberof MeetingsListEntry
+     */
+    'diagnosis': string;
+    /**
+     * Extra notes from the doctor about the patient
+     * @type {string}
+     * @memberof MeetingsListEntry
+     */
+    'notes': string;
+}
+/**
+ * 
+ * @export
+ * @interface NewMeeting
+ */
+export interface NewMeeting {
+    /**
+     * Name of doctor for the meeting
+     * @type {string}
+     * @memberof NewMeeting
+     */
+    'doctorName': string;
+    /**
+     * Name of patient for the meeting
+     * @type {string}
+     * @memberof NewMeeting
+     */
+    'patientName': string;
+    /**
+     * Date when meeting will take place
+     * @type {string}
+     * @memberof NewMeeting
+     */
+    'date': string;
+    /**
+     * Start time of meeting
+     * @type {string}
+     * @memberof NewMeeting
+     */
+    'startTime': string;
+    /**
+     * End time of meeting
+     * @type {string}
+     * @memberof NewMeeting
+     */
+    'endTime': string;
+    /**
+     * Whether meeting is important
+     * @type {boolean}
+     * @memberof NewMeeting
+     */
+    'important': boolean;
+    /**
+     * Online platform for the meeting
+     * @type {string}
+     * @memberof NewMeeting
+     */
+    'platform': string;
+    /**
+     * Patients symptoms
+     * @type {string}
+     * @memberof NewMeeting
+     */
+    'symptoms': string;
+    /**
+     * Diagnosis for the patients problems
+     * @type {string}
+     * @memberof NewMeeting
+     */
+    'diagnosis': string;
+    /**
+     * Extra notes from the doctor about the patient
+     * @type {string}
+     * @memberof NewMeeting
+     */
+    'notes': string;
 }
 
 /**
@@ -79,6 +170,110 @@ export interface MeetingsListEntry {
  */
 export const MeetingsListApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * Use this method to create a new meeting.
+         * @summary Creates new meeting
+         * @param {NewMeeting} newMeeting Meeting to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createMeeting: async (newMeeting: NewMeeting, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'newMeeting' is not null or undefined
+            assertParamExists('createMeeting', 'newMeeting', newMeeting)
+            const localVarPath = `/meetings`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(newMeeting, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this method to delete the specific meeting.
+         * @summary Deletes specific meeting
+         * @param {string} entryId pass the id of the particular meeting
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteMeeting: async (entryId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'entryId' is not null or undefined
+            assertParamExists('deleteMeeting', 'entryId', entryId)
+            const localVarPath = `/meetings/{entryId}`
+                .replace(`{${"entryId"}}`, encodeURIComponent(String(entryId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * By using entryId you can details of particular meeting.
+         * @summary Provides details about meeting
+         * @param {string} entryId pass the id of the particular meeting
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMeeting: async (entryId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'entryId' is not null or undefined
+            assertParamExists('getMeeting', 'entryId', entryId)
+            const localVarPath = `/meetings/{entryId}`
+                .replace(`{${"entryId"}}`, encodeURIComponent(String(entryId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * You get a list of online meetings
          * @summary Provides the online meetings list
@@ -109,6 +304,46 @@ export const MeetingsListApiAxiosParamCreator = function (configuration?: Config
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Use this method to update content of the meeting.
+         * @summary Updates specific meeting
+         * @param {string} entryId pass the id of the particular meeting
+         * @param {MeetingsListEntry} meetingsListEntry Meeting to update
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateMeeting: async (entryId: string, meetingsListEntry: MeetingsListEntry, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'entryId' is not null or undefined
+            assertParamExists('updateMeeting', 'entryId', entryId)
+            // verify required parameter 'meetingsListEntry' is not null or undefined
+            assertParamExists('updateMeeting', 'meetingsListEntry', meetingsListEntry)
+            const localVarPath = `/meetings/{entryId}`
+                .replace(`{${"entryId"}}`, encodeURIComponent(String(entryId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(meetingsListEntry, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -120,6 +355,39 @@ export const MeetingsListApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = MeetingsListApiAxiosParamCreator(configuration)
     return {
         /**
+         * Use this method to create a new meeting.
+         * @summary Creates new meeting
+         * @param {NewMeeting} newMeeting Meeting to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createMeeting(newMeeting: NewMeeting, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MeetingsListEntry>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createMeeting(newMeeting, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this method to delete the specific meeting.
+         * @summary Deletes specific meeting
+         * @param {string} entryId pass the id of the particular meeting
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteMeeting(entryId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteMeeting(entryId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * By using entryId you can details of particular meeting.
+         * @summary Provides details about meeting
+         * @param {string} entryId pass the id of the particular meeting
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getMeeting(entryId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MeetingsListEntry>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMeeting(entryId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * You get a list of online meetings
          * @summary Provides the online meetings list
          * @param {*} [options] Override http request option.
@@ -127,6 +395,18 @@ export const MeetingsListApiFp = function(configuration?: Configuration) {
          */
         async getMeetingsList(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<MeetingsListEntry>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getMeetingsList(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Use this method to update content of the meeting.
+         * @summary Updates specific meeting
+         * @param {string} entryId pass the id of the particular meeting
+         * @param {MeetingsListEntry} meetingsListEntry Meeting to update
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateMeeting(entryId: string, meetingsListEntry: MeetingsListEntry, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MeetingsListEntry>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateMeeting(entryId, meetingsListEntry, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -140,6 +420,36 @@ export const MeetingsListApiFactory = function (configuration?: Configuration, b
     const localVarFp = MeetingsListApiFp(configuration)
     return {
         /**
+         * Use this method to create a new meeting.
+         * @summary Creates new meeting
+         * @param {NewMeeting} newMeeting Meeting to create
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createMeeting(newMeeting: NewMeeting, options?: any): AxiosPromise<MeetingsListEntry> {
+            return localVarFp.createMeeting(newMeeting, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this method to delete the specific meeting.
+         * @summary Deletes specific meeting
+         * @param {string} entryId pass the id of the particular meeting
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteMeeting(entryId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteMeeting(entryId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * By using entryId you can details of particular meeting.
+         * @summary Provides details about meeting
+         * @param {string} entryId pass the id of the particular meeting
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMeeting(entryId: string, options?: any): AxiosPromise<MeetingsListEntry> {
+            return localVarFp.getMeeting(entryId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * You get a list of online meetings
          * @summary Provides the online meetings list
          * @param {*} [options] Override http request option.
@@ -147,6 +457,17 @@ export const MeetingsListApiFactory = function (configuration?: Configuration, b
          */
         getMeetingsList(options?: any): AxiosPromise<Array<MeetingsListEntry>> {
             return localVarFp.getMeetingsList(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Use this method to update content of the meeting.
+         * @summary Updates specific meeting
+         * @param {string} entryId pass the id of the particular meeting
+         * @param {MeetingsListEntry} meetingsListEntry Meeting to update
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateMeeting(entryId: string, meetingsListEntry: MeetingsListEntry, options?: any): AxiosPromise<MeetingsListEntry> {
+            return localVarFp.updateMeeting(entryId, meetingsListEntry, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -158,6 +479,36 @@ export const MeetingsListApiFactory = function (configuration?: Configuration, b
  */
 export interface MeetingsListApiInterface {
     /**
+     * Use this method to create a new meeting.
+     * @summary Creates new meeting
+     * @param {NewMeeting} newMeeting Meeting to create
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MeetingsListApiInterface
+     */
+    createMeeting(newMeeting: NewMeeting, options?: AxiosRequestConfig): AxiosPromise<MeetingsListEntry>;
+
+    /**
+     * Use this method to delete the specific meeting.
+     * @summary Deletes specific meeting
+     * @param {string} entryId pass the id of the particular meeting
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MeetingsListApiInterface
+     */
+    deleteMeeting(entryId: string, options?: AxiosRequestConfig): AxiosPromise<void>;
+
+    /**
+     * By using entryId you can details of particular meeting.
+     * @summary Provides details about meeting
+     * @param {string} entryId pass the id of the particular meeting
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MeetingsListApiInterface
+     */
+    getMeeting(entryId: string, options?: AxiosRequestConfig): AxiosPromise<MeetingsListEntry>;
+
+    /**
      * You get a list of online meetings
      * @summary Provides the online meetings list
      * @param {*} [options] Override http request option.
@@ -165,6 +516,17 @@ export interface MeetingsListApiInterface {
      * @memberof MeetingsListApiInterface
      */
     getMeetingsList(options?: AxiosRequestConfig): AxiosPromise<Array<MeetingsListEntry>>;
+
+    /**
+     * Use this method to update content of the meeting.
+     * @summary Updates specific meeting
+     * @param {string} entryId pass the id of the particular meeting
+     * @param {MeetingsListEntry} meetingsListEntry Meeting to update
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MeetingsListApiInterface
+     */
+    updateMeeting(entryId: string, meetingsListEntry: MeetingsListEntry, options?: AxiosRequestConfig): AxiosPromise<MeetingsListEntry>;
 
 }
 
@@ -176,6 +538,42 @@ export interface MeetingsListApiInterface {
  */
 export class MeetingsListApi extends BaseAPI implements MeetingsListApiInterface {
     /**
+     * Use this method to create a new meeting.
+     * @summary Creates new meeting
+     * @param {NewMeeting} newMeeting Meeting to create
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MeetingsListApi
+     */
+    public createMeeting(newMeeting: NewMeeting, options?: AxiosRequestConfig) {
+        return MeetingsListApiFp(this.configuration).createMeeting(newMeeting, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this method to delete the specific meeting.
+     * @summary Deletes specific meeting
+     * @param {string} entryId pass the id of the particular meeting
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MeetingsListApi
+     */
+    public deleteMeeting(entryId: string, options?: AxiosRequestConfig) {
+        return MeetingsListApiFp(this.configuration).deleteMeeting(entryId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * By using entryId you can details of particular meeting.
+     * @summary Provides details about meeting
+     * @param {string} entryId pass the id of the particular meeting
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MeetingsListApi
+     */
+    public getMeeting(entryId: string, options?: AxiosRequestConfig) {
+        return MeetingsListApiFp(this.configuration).getMeeting(entryId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * You get a list of online meetings
      * @summary Provides the online meetings list
      * @param {*} [options] Override http request option.
@@ -184,6 +582,19 @@ export class MeetingsListApi extends BaseAPI implements MeetingsListApiInterface
      */
     public getMeetingsList(options?: AxiosRequestConfig) {
         return MeetingsListApiFp(this.configuration).getMeetingsList(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Use this method to update content of the meeting.
+     * @summary Updates specific meeting
+     * @param {string} entryId pass the id of the particular meeting
+     * @param {MeetingsListEntry} meetingsListEntry Meeting to update
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MeetingsListApi
+     */
+    public updateMeeting(entryId: string, meetingsListEntry: MeetingsListEntry, options?: AxiosRequestConfig) {
+        return MeetingsListApiFp(this.configuration).updateMeeting(entryId, meetingsListEntry, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

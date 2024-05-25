@@ -31,10 +31,7 @@ export class MeetingsList {
   async componentWillLoad() {
     this.meetings = await this.getMeetingsAsync();
   }
-  private isoDateToLocaleTime(iso: string) {
-    if (!iso) return '';
-    return new Date(Date.parse(iso)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  }
+
   private isoDateToLocaleDate(iso: string) {
     if (!iso) return '';
     return new Date(Date.parse(iso)).toLocaleDateString();
@@ -47,8 +44,8 @@ export class MeetingsList {
           <div class="error">{this.errorMessage}</div>
         ) : (
           <md-list class="list">
-            {this.meetings.map((meeting, index) => (
-              <md-list-item class="item" onClick={() => this.entryClicked.emit(index.toString())}>
+            {this.meetings.map(meeting => (
+              <md-list-item class="item" onClick={() => this.entryClicked.emit(meeting.id)}>
                 <md-ripple></md-ripple>
                 <div class="content">
                   <div class="content-colum">
@@ -58,7 +55,7 @@ export class MeetingsList {
                     </div>
                     <div slot="headline">
                       <strong>Čas: </strong>
-                      {this.isoDateToLocaleTime(meeting.startTime) + ' - ' + this.isoDateToLocaleTime(meeting.endTime)}
+                      {meeting.startTime + ' - ' + meeting.endTime}
                     </div>
                   </div>
                   <div class="content-colum">
@@ -73,6 +70,7 @@ export class MeetingsList {
                   </div>
                 </div>
                 <md-icon slot="start">contact_phone</md-icon>
+                {meeting.important && <md-icon slot="end">priority_high</md-icon>}
               </md-list-item>
             ))}
           </md-list>

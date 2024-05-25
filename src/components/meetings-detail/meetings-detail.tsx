@@ -1,4 +1,5 @@
-import { Component, Host, Prop, h, EventEmitter, Event } from '@stencil/core';
+import { Component, Host, Prop, h, EventEmitter, Event, State } from '@stencil/core';
+import { MeetingsListApiFactory, MeetingsListEntry } from '../../api/meetings';
 
 @Component({
   tag: 'meetings-detail',
@@ -6,28 +7,34 @@ import { Component, Host, Prop, h, EventEmitter, Event } from '@stencil/core';
   shadow: true,
 })
 export class MeetingsDetail {
-  meeting = {
-    doctorName: 'Jožko Púčik',
-    patientName: 'John Doe',
-    date: new Date(Date.now()).toISOString(),
-    startTime: new Date(Date.now() - 10 * 60 * 1000).toISOString(),
-    endTime: new Date(Date.now() + 65 * 60 * 1000).toISOString(),
-    platform: 'ms_teams',
-    important: true,
-    symptoms: 'Persistent cough, mild fever, fatigue',
-    diagnosis: 'Viral upper respiratory infection',
-    notes: 'Patient advised to rest, stay hydrated, and take over-the-counter medications as needed. Follow-up in one week if symptoms persist or worsen.',
-  };
-
   @Prop() entryId: string;
+  @Prop() apiBase: string;
+
+  @State() meeting: MeetingsListEntry;
+  @State() errorMessage: string;
 
   @Event({ eventName: 'editor-clicked' }) editorClicked: EventEmitter<string>;
   @Event({ eventName: 'cancel-clicked' }) cancelClicked: EventEmitter<string>;
 
-  private isoDateToLocaleTime(iso: string) {
-    if (!iso) return '';
-    return new Date(Date.parse(iso)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  private async getMeetingAsync(): Promise<MeetingsListEntry> {
+    try {
+      const response = await MeetingsListApiFactory(undefined, this.apiBase).getMeeting(this.entryId);
+
+      if (response.status < 299) {
+        this.meeting = response.data;
+      } else {
+        this.errorMessage = `Cannot retrieve meeting: ${response.statusText}`;
+      }
+    } catch (err: any) {
+      this.errorMessage = `Cannot retrieve meeting: ${err.message || 'unknown'}`;
+    }
+    return undefined;
   }
+
+  async componentWillLoad() {
+    this.getMeetingAsync();
+  }
+
   private isoDateToLocaleDate(iso: string) {
     if (!iso) return '';
     return new Date(Date.parse(iso)).toLocaleDateString();
@@ -45,11 +52,18 @@ export class MeetingsDetail {
     }
   }
   render() {
+    if (this.errorMessage) {
+      return (
+        <Host>
+          <div class="error">{this.errorMessage}</div>
+        </Host>
+      );
+    }
     return (
       <Host>
         <h2>Online stretnutie</h2>
         <div class="basic-info">
-          {this.meeting.important ? (
+          {this.meeting?.important ? (
             <p class="important">
               <md-icon slot="leading-icon">priority_high</md-icon>
               <em>Toto stretnutie je dôležité!</em>
@@ -59,20 +73,19 @@ export class MeetingsDetail {
           )}
           <p class="title">
             <md-icon slot="leading-icon">stethoscope</md-icon>
-            <strong>Doktor:</strong> {this.meeting.doctorName}
+            <strong>Doktor:</strong> {this.meeting?.doctorName}
           </p>
           <p class="title">
             <md-icon slot="leading-icon">personal_injury</md-icon>
-            <strong>Pacient:</strong> {this.meeting.patientName}
+            <strong>Pacient:</strong> {this.meeting?.patientName}
           </p>
           <p class="title">
             <md-icon slot="leading-icon">schedule</md-icon>
-            <strong>Dátum a čas:</strong>{' '}
-            {this.isoDateToLocaleDate(this.meeting.date) + ' ' + this.isoDateToLocaleTime(this.meeting.startTime) + ' - ' + this.isoDateToLocaleTime(this.meeting.endTime)}
+            <strong>Dátum a čas:</strong> {this.isoDateToLocaleDate(this.meeting?.date) + ' ' + this.meeting?.startTime + ' - ' + this.meeting?.endTime}
           </p>
           <p class="title">
             <md-icon slot="leading-icon">podium</md-icon>
-            <strong>Platforma:</strong> {this.platformToString(this.meeting.platform)}
+            <strong>Platforma:</strong> {this.platformToString(this.meeting?.platform)}
           </p>
         </div>
         <div class="basic-info">
@@ -80,21 +93,21 @@ export class MeetingsDetail {
             <md-icon slot="leading-icon">sick</md-icon>
             <strong>Symptómy:</strong>
           </p>
-          <p>{this.meeting.symptoms}</p>
+          <p>{this.meeting?.symptoms}</p>
         </div>
         <div class="basic-info">
           <p class="title">
             <md-icon slot="leading-icon">ecg_heart</md-icon>
             <strong>Diagnóza:</strong>
           </p>
-          <p>{this.meeting.diagnosis}</p>
+          <p>{this.meeting?.diagnosis}</p>
         </div>
         <div class="basic-info">
           <p class="title">
             <md-icon slot="leading-icon">clinical_notes</md-icon>
             <strong>Poznámky:</strong>
           </p>
-          <p>{this.meeting.notes}</p>
+          <p>{this.meeting?.notes}</p>
         </div>
         <md-divider></md-divider>
         <div class="actions">

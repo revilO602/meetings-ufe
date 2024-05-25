@@ -14,6 +14,10 @@ describe('meetings-list', () => {
       startTime: '03:45',
       endTime: '04:45',
       important: false,
+      platform: 'ms_teams',
+      symptoms: 'deded',
+      diagnosis: 'deededed',
+      notes: 'ddedee',
     },
     {
       id: 'entry-2',
@@ -23,6 +27,10 @@ describe('meetings-list', () => {
       startTime: '03:45',
       endTime: '04:45',
       important: true,
+      platform: 'ms_teams',
+      symptoms: 'deded',
+      diagnosis: 'deededed',
+      notes: 'ddedee',
     },
   ];
 

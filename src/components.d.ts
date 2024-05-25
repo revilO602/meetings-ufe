@@ -11,11 +11,14 @@ export namespace Components {
         "basePath": string;
     }
     interface MeetingsCreator {
+        "apiBase": string;
     }
     interface MeetingsDetail {
+        "apiBase": string;
         "entryId": string;
     }
     interface MeetingsEditor {
+        "apiBase": string;
         "entryId": string;
     }
     interface MeetingsList {
@@ -131,15 +134,18 @@ declare namespace LocalJSX {
         "basePath"?: string;
     }
     interface MeetingsCreator {
+        "apiBase"?: string;
         "onCancel-clicked"?: (event: MeetingsCreatorCustomEvent<string>) => void;
         "onCreator-closed"?: (event: MeetingsCreatorCustomEvent<string>) => void;
     }
     interface MeetingsDetail {
+        "apiBase"?: string;
         "entryId"?: string;
         "onCancel-clicked"?: (event: MeetingsDetailCustomEvent<string>) => void;
         "onEditor-clicked"?: (event: MeetingsDetailCustomEvent<string>) => void;
     }
     interface MeetingsEditor {
+        "apiBase"?: string;
         "entryId"?: string;
         "onCancel-clicked"?: (event: MeetingsEditorCustomEvent<string>) => void;
         "onEditor-closed"?: (event: MeetingsEditorCustomEvent<string>) => void;
