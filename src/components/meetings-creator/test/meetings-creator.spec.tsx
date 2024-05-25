@@ -2,7 +2,6 @@ import { newSpecPage } from '@stencil/core/testing';
 import { MeetingsCreator } from '../meetings-creator';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { MeetingsListEntry } from '../../../api/meetings';
 
 describe('meetings-creator', () => {
   let delay = async (miliseconds: number) =>
