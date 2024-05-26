@@ -66,9 +66,14 @@ export class MeetingsApp {
             oncancel-clicked={() => navigate('./list')}
           ></meetings-detail>
         ) : element === 'editor' ? (
-          <meetings-editor entry-id={entryId} oncancel-clicked={() => navigate('./entry/' + entryId)} api-base={this.apiBase}></meetings-editor>
+          <meetings-editor
+            entry-id={entryId}
+            oneditor-closed={() => navigate('./list')}
+            oncancel-clicked={() => navigate('./entry/' + entryId)}
+            api-base={this.apiBase}
+          ></meetings-editor>
         ) : element === 'creator' ? (
-          <meetings-creator oncancel-clicked={() => navigate('./list')} api-base={this.apiBase}></meetings-creator>
+          <meetings-creator oncreator-closed={() => navigate('./list')} oncancel-clicked={() => navigate('./list')} api-base={this.apiBase}></meetings-creator>
         ) : (
           <meetings-list
             api-base={this.apiBase}
